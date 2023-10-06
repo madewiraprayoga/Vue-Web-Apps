@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <!-- Tambahkan CDN Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+        <header class="bg-green-700 p-4 shadow-md mb-8">
+            <!-- Logo dan navigasi -->
+            <div class="flex justify-between items-center">
+              <h1 class="text-2xl font-semibold mb-4">
+                <span class= "uppercase text-lg sm:text-xl font-extrabold text-white">Pryga</span>
+                <span class= "uppercase text-lg sm:text-xl font-extrabold text-white">Shop </span>
+               </h1>
+                <nav class="space-x-4 text-white flex justify-center items-center">
+                    <a href="index.html">
+                      <span class="font-semibold">Home</span>
+                    </a>
+                    <a href="#">
+                      <span class="font-semibold">Products</span>
+                    </a>
+                </nav>
+            </div>
+        </header>
+    <div id="app" class="container mx-auto py-8">
+        <h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
+
+        <!-- Tambahkan komponen Vue.js di sini -->
+        <div>
+            <!-- Input pencarian -->
+            <div class="mb-4">
+                <input v-model="searchText" class="border rounded px-4 py-2" type="text" placeholder="Cari produk...">
+                <button @click="clearSearch" class="bg-red-500 text-white px-2 py-1 ml-2 rounded hover:bg-red-700">Hapus</button>
+            </div>
+            <!-- Tampilkan daftar produk di sini -->
+            <div class="grid grid-cols-3 gap-4">
+                <!-- produk 1 -->
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/sari roma.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Biskuit Roma</h2>
+                    <p>Harga: 8.000</p>
+                    <button @click="addToCart('Biskuit Roma', 8000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+
+                <!-- produk 2 -->
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/minyak.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Minyak Goreng</h2>
+                    <p>Harga: 18.000</p>
+                    <button @click="addToCart('Minyak Goreng', 18000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+
+                <!-- produk 3 -->
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/susu.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Susu Murni</h2>
+                    <p>Harga: 15.000</p>
+                    <button @click="addToCart('Susu Murni', 15000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+                <!--produk 4-->
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/kecap bango.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Kecap Bango</h2>
+                    <p>Harga: 5.000</p>
+                    <button @click="addToCart('Kecap Bango', 5000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/mie goreng.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Mie Instan</h2>
+                    <p>Harga: 60.000</p>
+                    <button @click="addToCart('Mie Instan', 60000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+
+                <div v-for="(product, index) in filteredProducts" :key="index" class="bg-white p-4 rounded shadow"></div>
+                <div class="bg-white p-4 rounded shadow">
+                    <div class="gambar space-y-5 md:w-1/2">
+                        <img src="img/berasenak.png" class="top-4" alt="" />
+                    </div>
+                    <h2 class="text-lg font-semibold">Beras</h2>
+                    <p>Harga: 120.000</p>
+                    <button @click="addToCart('Beras', 120000)" class="bg-blue-500 text-white px-4 py-2 mt-2 rounded hover:bg-blue-700">Tambah ke Keranjang</button>
+                </div>
+            </div>
+
+            <!-- Tampilkan keranjang belanja di sini -->
+            <div class="mt-8">
+                <h2 class="text-lg font-semibold">Keranjang Belanja</h2>
+                <ul>
+                    <!-- Daftar item di keranjang belanja -->
+                    <li v-for="(item, index) in cart" :key="index">{{ item.name }} - {{ item.price }}</li>
+                    <button class="bg-red-500 text-white px-2 py-1 ml-2 rounded hover:bg-red-700" @click="removeFromCart(index)">Batal</button>
+                </ul>
+                <p class="mt-4">Total: {{ total }}</p>
+                <!-- Tombol Checkout dengan efek loading -->
+                <button
+                    class="bg-green-500 text-white px-4 py-2 mt-2 rounded hover:bg-green-700"
+                    @click="checkout"
+                    :disabled="isLoading" 
+                    >
+                    {{ isLoading ? 'Loading...' : 'Checkout' }}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tambahkan CDN Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                cart: [],
+                total: 0,
+                searchText: '', // Menyimpan teks pencarian
+                isLoading: false, // Menyimpan status loading
+                products: [
+                // Definisikan daftar produk Anda di sini
+                ],
+            },
+            methods: {
+                addToCart(productName, price) {
+                    this.cart.push({ name: productName, price: price });
+                    this.calculateTotal();
+                },
+                calculateTotal() {
+                    this.total = this.cart.reduce((sum, item) => sum + item.price, 0);
+                },
+                removeFromCart(index) {
+                    // Menghapus item dari keranjang berdasarkan indeks
+                    this.cart.splice(index, 1);
+                    this.calculateTotal();
+                },
+                checkout() {
+                    this.isLoading = true; // Menampilkan efek loading
+
+                    // Menggunakan setTimeout untuk mensimulasikan proses checkout yang memakan waktu
+                    setTimeout(() => {
+                    // Lakukan sesuatu ketika checkout
+                    alert('Terima kasih telah berbelanja!');
+                    this.cart = [];
+                    // Reset total ke 0
+                    this.total = 0;
+                    this.isLoading = false; // Menghilangkan efek loading setelah berhasil
+                    }, 2000); // Mengatur timeout selama 2 detik, Anda dapat menggantinya sesuai dengan kebutuhan Anda
+                },
+                clearSearch() {
+                    // Menghapus teks pencarian
+                    this.searchText = '';
+                },
+            },
+        });
+    </script>
+</body>
+</html>
